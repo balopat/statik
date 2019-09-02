@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/rakyll/statik/cmd"
+	"github.com/balopat/statik/cmd"
 )
 
 func main() {
