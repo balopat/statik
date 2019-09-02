@@ -1,6 +1,6 @@
 # statik
 
-[![Build Status](https://travis-ci.org/rakyll/statik.svg?branch=master)](https://travis-ci.org/rakyll/statik)
+[![Build Status](https://travis-ci.org/balopat/statik.svg?branch=master)](https://travis-ci.org/balopat/statik)
 
 statik allows you to embed a directory of static files into your Go binary to be later served from an http.FileSystem.
 
@@ -10,8 +10,8 @@ Is this a crazy idea? No, not necessarily. If you're building a tool that has a 
 
 Install the command line tool first.
 
-	go get github.com/rakyll/statik
-
+	go get github.com/balopat/statik
+	
 statik is a tiny program that reads a directory and generates a source file that contains its contents. The generated source file registers the directory contents to be used by statik file system.
 
 The command below will walk on the public path and generate a package called `statik` under the current working directory.
@@ -22,7 +22,7 @@ In your program, all your need to do is to import the generated package, initial
 
 ~~~ go
 import (
-  "github.com/rakyll/statik/fs"
+  "github.com/balopat/statik/fs"
 
   _ "./statik" // TODO: Replace with the absolute import path
 )
@@ -40,6 +40,32 @@ import (
 
 Visit http://localhost:8080/public/path/to/file to see your file.
 
-There is also a working example under [example](https://github.com/rakyll/statik/tree/master/example) directory, follow the instructions to build and run it.
+There is also a working example under [example](https://github.com/balopat/statik/tree/master/example) directory, follow the instructions to build and run it.
+
+Alternative to `go get`, you can also vendor statik to use in `go generate`: 
+ 
+Create a file gen.go:
+ 
+ ```
+ package main
+ 
+ import (
+ 	"github.com/balopat/statik/cmd"
+ )
+ 
+ func main() {
+ 	cmd.Main()
+ }
+ ```
+ 
+ and use that in the `go generate` command:
+ 
+ ```
+ //go:generate go run ./gen/gen.go -src=./public -tags !dev
+ 
+ ```
+ 
+This way you can control which tag/commit of the tool you want to use. 
+
 
 Note: The idea and the implementation are hijacked from [camlistore](http://camlistore.org/). I decided to decouple it from its codebase due to the fact I'm actively in need of a similar solution for many of my projects.
