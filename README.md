@@ -1,6 +1,8 @@
-# statik
+This is a temporary fork of rakyll/statik until https://github.com/rakyll/statik/pull/86/files gets resolved.
 
-[![Build Status](https://travis-ci.org/balopat/statik.svg?branch=master)](https://travis-ci.org/balopat/statik)
+---
+
+# statik
 
 statik allows you to embed a directory of static files into your Go binary to be later served from an http.FileSystem.
 
